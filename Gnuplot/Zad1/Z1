@@ -1,0 +1,31 @@
+#!/bin/awk -f
+
+# Autor: Kamil Breczko
+#
+# Kurs pracy w systemie Linux 
+# semestr 2015/2017 letni
+
+BEGIN{
+	FS = "x"	
+	RS = "+"
+	i=0
+}
+{
+	i++
+	if ($1==""){tab[i]=1}
+	else {tab[i]=$1}	
+}
+END{
+	for (i=1;i<=20;i++){
+		x=int (-10+rand()*30)
+		if (x in para){i--}
+		else{
+			para[x]=tab[1]*x*x+tab[2]*x+tab[3]
+		}	
+	}
+	for(x in para){
+	 	printf ("%d %d \n",x,para[x])>"funkcja"
+	}
+}
+
+

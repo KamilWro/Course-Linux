@@ -1,0 +1,19 @@
+#!/bin/awk -f
+
+# Autor: Kamil Breczko
+#
+# Kurs pracy w systemie Linux 
+# semestr 2015/2017 letni
+
+END{
+	printf ("0 Poprawne Niepoprawne Pominięte")>"test"
+	for (i=1;i<=20;i++){
+		poprawne=int (rand()*61)
+		pozostale=60-poprawne
+		niepoprawne=int (rand()*pozostale)
+		pominiete=60-poprawne-niepoprawne	
+		printf ("%d %d %d %d \n",i,poprawne,niepoprawne,pominiete)>"test"	
+	}
+}
+
+

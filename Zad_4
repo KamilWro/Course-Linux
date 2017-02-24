@@ -1,0 +1,49 @@
+#!/bin/awk -f
+
+
+# Autor: Kamil Breczko
+#
+# Kurs pracy w systemie Linux 
+# semestr 2015/2017 letni
+
+
+
+{
+	if ($3 in pkt) {
+		pkt[$3]=pkt[$3]+$4
+		licz[$3]=licz[$3]+1
+		if(max[$3]<$4) {
+			max[$3]=$4		
+		}	
+		if (min[$3]>$4) {
+			min[$3]=$4	
+		}
+	}
+	else {		
+		imie[$3]=$1
+		nazwisko[$3]=$2	
+		pkt[$3]=$4
+		licz[$3]=1
+		max[$3]=$4		
+		min[$3]=$4		
+	}
+}
+END{
+	for(zm in pkt){
+	 	printf ("%s ",imie[zm])
+		printf ("%s ",nazwisko[zm])
+		printf ("%d ",zm)	
+		printf ("%d ",licz[zm])
+		printf ("%d ",pkt[zm])
+		printf ("%d ",pkt[zm]/licz[zm])		
+		if(licz[zm]==1||licz[zm]==2){
+			printf("%d \n",0)	
+		}	
+		else{
+			printf ("%d \n",(pkt[zm]-max[zm]-min[zm])/(licz[zm]-2))		
+		}
+	}
+
+}
+
+
